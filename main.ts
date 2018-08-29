@@ -10,7 +10,7 @@ enum dht22type {
 //% color=#F6421B icon="\uf2c9" block="DHT22"
 namespace DHT22 {
     let pin = DigitalPin.P0
-    function signal_dht11(pin: DigitalPin): void {
+    function signal_dht22(pin: DigitalPin): void {
         pins.digitalWritePin(pin, 0)
         basic.pause(18)
         pins.setPull(pin, PinPullMode.PullUp)
@@ -21,14 +21,14 @@ namespace DHT22 {
      *
      */
     //% block="DHT22 pin %pin_arg|data %data_type"
-    //% blockId=reading_dht11_data
+    //% blockId=reading_dht22_data
     //% pin_arg.fieldEditor="gridpicker" pin_arg.fieldOptions.columns=5
     //% pin_arg.fieldOptions.tooltips="false"
     //% weight=0
     export function dht22_read(pin_arg: DigitalPin, data_type: dht22type): number {
         basic.pause(500)
         pin = pin_arg
-        signal_dht11(pin)
+        signal_dht22(pin)
 
         // Wait for response header to finish
         while (pins.digitalReadPin(pin) == 1);
