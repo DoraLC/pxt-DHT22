@@ -3,6 +3,7 @@
 ## DHT22
 
 - driver for DHT22 - Digital Humidity Temperature sensor
+- using v0 editor may occur error
 
 ## License
 

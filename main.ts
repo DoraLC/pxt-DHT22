@@ -46,7 +46,7 @@ namespace DHT22 {
             while (pins.digitalReadPin(pin) == 1) {
                 counter += 1;
             }
-            if (counter > 4) {
+            if (counter > 2) {
                 if (i < 16) {
                     value = value + (1 << (15 - i));
                 }
