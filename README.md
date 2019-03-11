@@ -15,5 +15,5 @@ MIT
 (The metadata above is needed for package search.)
 
 ```package
-github:DoraLC/pxt-DHT22-Humidity-Temperature-sensor
+github:DoraLC/pxt-DHT22
 ```
