@@ -27,7 +27,7 @@ namespace DHT22 {
     //% pin_arg.fieldOptions.tooltips="false"
     //% weight=0
     export function dht22_read(pin_arg: DigitalPin, data_type: dht22type): number {
-        basic.pause(500)
+        basic.pause(3000)
         pin = pin_arg
         signal_dht22(pin)
 
