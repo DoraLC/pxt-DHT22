@@ -28,7 +28,7 @@ namespace DHT22 {
     //% block="READ DHT22 pin %pin_arg"
     //% pin_arg.fieldEditor="gridpicker" pin_arg.fieldOptions.columns=5
     //% pin_arg.fieldOptions.tooltips="false"
-    //% weight=0
+    //% weight=100
     export function dht22_read(pin_arg: DigitalPin) {
         basic.pause(3000)
         pin = pin_arg
