@@ -29,8 +29,8 @@ namespace DHT22 {
         control.waitMicros(40)
     }
 
-    //% block="Choose micro:bit version %mbver"
-    //% weight=1
+    //% block="Choose micro:bit %mbver"
+    //% weight=1000
     export function microbitVersion(mbver: mbVersion){
         switch (mbver){
             case 0:
