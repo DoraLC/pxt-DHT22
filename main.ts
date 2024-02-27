@@ -35,10 +35,11 @@ namespace DHT22 {
         switch (mbver){
             case 0:
                 counter_limit = 2
+                break
             case 1:
                 counter_limit = 12
+                break
             default:
-                counter_limit = 2
         }
     }
 
