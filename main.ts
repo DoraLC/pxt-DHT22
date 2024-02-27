@@ -24,10 +24,8 @@ namespace DHT22 {
     let pin = DigitalPin.P0
     function signal_dht22(pin: DigitalPin): void {
         pins.digitalWritePin(pin, 0)
-        basic.pause(18)
+        basic.pause(1)
         pins.setPull(pin, PinPullMode.PullUp)
-        pins.digitalReadPin(pin)
-        control.waitMicros(40)
     }
 
     //% block="Choose micro:bit %mbver"
@@ -53,7 +51,7 @@ namespace DHT22 {
     //% pin_arg.fieldOptions.tooltips="false"
     //% weight=100
     export function dht22_read(pin_arg: DigitalPin) {
-        basic.pause(3000)
+        basic.pause(2000)
         pin = pin_arg
         signal_dht22(pin)
 
