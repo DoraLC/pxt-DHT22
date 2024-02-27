@@ -26,6 +26,7 @@ namespace DHT22 {
         pins.digitalWritePin(pin, 0)
         basic.pause(18)
         pins.setPull(pin, PinPullMode.PullUp)
+        pins.digitalReadPin(pin)
         control.waitMicros(40)
     }
 
