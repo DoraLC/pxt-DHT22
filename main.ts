@@ -7,11 +7,19 @@ enum dht22type {
     humidity
 }
 
+enum mbVersion {
+    //% block="Version 1"
+    v1,
+    //% block='Version 2"
+    v2
+}
+
 //% color=#F6421B icon="\uf2c9" block="DHT22"
 namespace DHT22 {
     let temp_C = -999
     let temp_F = -999
     let humid = -999
+    let counter_limit = 2
 
     let pin = DigitalPin.P0
     function signal_dht22(pin: DigitalPin): void {
@@ -19,6 +27,19 @@ namespace DHT22 {
         basic.pause(18)
         pins.setPull(pin, PinPullMode.PullUp)
         control.waitMicros(40)
+    }
+
+    //% block="Choose micro:bit version %mbver"
+    //% weight=1
+    export function microbitVersion(mbver: mbVersion){
+        switch (mbver){
+            case 0:
+                counter_limit = 2
+            case 1:
+                counter_limit = 12
+            default:
+                counter_limit = 2
+        }
     }
 
     /**
@@ -50,7 +71,7 @@ namespace DHT22 {
             while (pins.digitalReadPin(pin) == 1) {
                 counter += 1;
             }
-            if (counter > 2) {
+            if (counter > counter_limit) {
                 if (i < 16) {
                     humid_raw = humid_raw + (1 << (15 - i));
                 }
