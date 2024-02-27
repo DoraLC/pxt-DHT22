@@ -10,7 +10,7 @@ enum dht22type {
 enum mbVersion {
     //% block="Version 1"
     v1,
-    //% block='Version 2"
+    //% block="Version 2"
     v2
 }
 
