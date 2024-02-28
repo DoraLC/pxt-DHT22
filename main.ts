@@ -23,17 +23,16 @@ namespace DHT22 {
 
     let pin = DigitalPin.P0
     function signal_dht22(pin: DigitalPin): void {
-        basic.pause(2000)
         pins.digitalWritePin(pin, 0)
         basic.pause(18)
-        let i = pins.digitalReadPin(pin)
+        pins.digitalReadPin(pin)
         pins.setPull(pin, PinPullMode.PullUp)
     }
 
     //% block="Choose micro:bit %mbver"
     //% weight=1000
-    export function microbitVersion(mbver: mbVersion){
-        switch (mbver){
+    export function microbitVersion(mbver: mbVersion) {
+        switch (mbver) {
             case 0:
                 counter_limit = 2
                 break
@@ -53,54 +52,42 @@ namespace DHT22 {
     //% pin_arg.fieldOptions.tooltips="false"
     //% weight=100
     export function dht22_read(pin_arg: DigitalPin) {
+        basic.pause(2000)
         pin = pin_arg
         signal_dht22(pin)
 
-        let responsed = true
-        let responseStartTime = control.millis()
-
         // Wait for response header to finish
-        while (pins.digitalReadPin(pin) == 1) {
-            if (control.millis() - responseStartTime > 5000) {
-                responsed = false
-                break
-            }
-        };
-        if (responsed) {
+        while (pins.digitalReadPin(pin) == 1);
+        while (pins.digitalReadPin(pin) == 0);
+        while (pins.digitalReadPin(pin) == 1);
+
+        let counter = 0
+        let humid_raw = 0
+        let temp_raw = 0
+        let check_sum = 0
+
+        for (let i = 0; i <= 40 - 1; i++) {
             while (pins.digitalReadPin(pin) == 0);
-            while (pins.digitalReadPin(pin) == 1);
-        }
-
-
-        if (responsed) {
-            let counter = 0
-            let humid_raw = 0
-            let temp_raw = 0
-            let check_sum = 0
-
-            for (let i = 0; i <= 40 - 1; i++) {
-                while (pins.digitalReadPin(pin) == 0);
-                counter = 0
-                while (pins.digitalReadPin(pin) == 1) {
-                    counter += 1;
+            counter = 0
+            while (pins.digitalReadPin(pin) == 1) {
+                counter += 1;
+            }
+            if (counter > counter_limit) {
+                if (i < 16) {
+                    humid_raw = humid_raw + (1 << (15 - i));
                 }
-                if (counter > counter_limit) {
-                    if (i < 16) {
-                        humid_raw = humid_raw + (1 << (15 - i));
-                    }
-                    else if (i < 32) {
-                        temp_raw = temp_raw + (1 << (31 - i))
-                    }
-                    else {
-                        check_sum = check_sum + (1 << (39 - i))
-                    }
+                else if (i < 32) {
+                    temp_raw = temp_raw + (1 << (31 - i))
+                }
+                else {
+                    check_sum = check_sum + (1 << (39 - i))
                 }
             }
-
-            temp_C = temp_raw / 10
-            temp_F = temp_C * 9 / 5 + 32
-            humid = humid_raw / 10
         }
+
+        temp_C = temp_raw / 10
+        temp_F = temp_C * 9 / 5 + 32
+        humid = humid_raw / 10
     }
 
     //% block="data %data_type"
