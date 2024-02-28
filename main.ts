@@ -66,12 +66,24 @@ namespace DHT22 {
         let temp_raw = 0
         let check_sum = 0
 
+        let timeOut = false
+
         for (let i = 0; i <= 40 - 1; i++) {
             while (pins.digitalReadPin(pin) == 0);
             counter = 0
             while (pins.digitalReadPin(pin) == 1) {
                 counter += 1;
+                if (counter > 5000) {
+                    //basic.showNumber(0)
+                    timeOut = true
+                    break
+                }
             }
+
+            if (timeOut) {
+                break
+            }
+
             if (counter > counter_limit) {
                 if (i < 16) {
                     humid_raw = humid_raw + (1 << (15 - i));
@@ -85,9 +97,15 @@ namespace DHT22 {
             }
         }
 
-        temp_C = temp_raw / 10
-        temp_F = temp_C * 9 / 5 + 32
-        humid = humid_raw / 10
+        if (!timeOut) {
+            temp_C = temp_raw / 10
+            temp_F = temp_C * 9 / 5 + 32
+            humid = humid_raw / 10
+
+            //basic.clearScreen()
+        }
+
+
     }
 
     //% block="data %data_type"
