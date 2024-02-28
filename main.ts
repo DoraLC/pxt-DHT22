@@ -23,6 +23,7 @@ namespace DHT22 {
 
     let pin = DigitalPin.P0
     function signal_dht22(pin: DigitalPin): void {
+        basic.pause(2000)
         pins.digitalWritePin(pin, 0)
         basic.pause(18)
         let i = pins.digitalReadPin(pin)
@@ -52,7 +53,6 @@ namespace DHT22 {
     //% pin_arg.fieldOptions.tooltips="false"
     //% weight=100
     export function dht22_read(pin_arg: DigitalPin) {
-        basic.pause(2000)
         pin = pin_arg
         signal_dht22(pin)
 
