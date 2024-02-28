@@ -66,13 +66,11 @@ namespace DHT22 {
                 break
             }
         };
-        while (pins.digitalReadPin(pin) == 0);
-        while (pins.digitalReadPin(pin) == 1) {
-            if (control.millis() - responseStartTime > 5000) {
-                responsed = false
-                break
-            }
-        };
+        if (responsed) {
+            while (pins.digitalReadPin(pin) == 0);
+            while (pins.digitalReadPin(pin) == 1);
+        }
+
 
         if (responsed) {
             let counter = 0
