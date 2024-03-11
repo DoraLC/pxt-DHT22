@@ -20,9 +20,11 @@ namespace DHT22 {
     let temp_F = -999
     let humid = -999
     let counter_limit = 2
+    let reading = false
 
     let pin = DigitalPin.P0
     function signal_dht22(pin: DigitalPin): void {
+        reading = true
         pins.digitalWritePin(pin, 0)
         basic.pause(18)
         pins.digitalReadPin(pin)
@@ -105,7 +107,7 @@ namespace DHT22 {
             //basic.clearScreen()
         }
 
-
+        reading = false
     }
 
     //% block="data %data_type"
@@ -120,5 +122,11 @@ namespace DHT22 {
             default:
                 return -999
         }
+    }
+
+    //% block="is reading?"
+    //% weight=1
+    export function ifreading(): boolean{
+        return reading
     }
 }
