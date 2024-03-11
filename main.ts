@@ -37,7 +37,7 @@ namespace DHT22 {
                 counter_limit = 2
                 break
             case 1:
-                counter_limit = 10
+                counter_limit = 12
                 break
             default:
         }
