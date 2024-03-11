@@ -73,7 +73,7 @@ namespace DHT22 {
             counter = 0
             while (pins.digitalReadPin(pin) == 1) {
                 counter += 1;
-                if (counter > 5000) {
+                if (counter > 10000) {
                     //basic.showNumber(0)
                     timeOut = true
                     break
