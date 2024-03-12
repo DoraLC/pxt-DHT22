@@ -124,7 +124,7 @@ namespace DHT22 {
         }
     }
 
-    //% block="is reading?"
+    //% block="is reading the data?"
     //% weight=1
     export function ifreading(): boolean{
         return reading
