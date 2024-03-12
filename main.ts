@@ -26,8 +26,6 @@ namespace DHT22 {
     function signal_dht22(pin: DigitalPin): void {
         pins.digitalWritePin(pin, 0)
         basic.pause(18)
-        pins.digitalWritePin(pin, 1)
-        control.waitMicros(40)
         pins.digitalReadPin(pin)
         pins.setPull(pin, PinPullMode.PullUp)
     }
@@ -77,7 +75,7 @@ namespace DHT22 {
             counter = 0
             while (pins.digitalReadPin(pin) == 1) {
                 counter += 1;
-                if (counter > 10000) {
+                if (counter > 100000) {
                     //basic.showNumber(0)
                     timeOut = true
                     break
