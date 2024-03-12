@@ -25,7 +25,9 @@ namespace DHT22 {
     let pin = DigitalPin.P0
     function signal_dht22(pin: DigitalPin): void {
         pins.digitalWritePin(pin, 0)
-        basic.pause(40)
+        basic.pause(18)
+        pins.digitalWritePin(pin, 1)
+        control.waitMicros(40)
         pins.digitalReadPin(pin)
         pins.setPull(pin, PinPullMode.PullUp)
     }
